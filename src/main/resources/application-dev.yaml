@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/archinsight-ai-api
+    username: postgres
+    password: totvs@123
+
+  # RabbitMQ Local (sobrescreve o addresses do application.yaml)
+  rabbitmq:
+    addresses: ""
+    host: ${SPRING_RABBITMQ_HOST:localhost}
+    port: ${SPRING_RABBITMQ_PORT:5672}
+    username: ${SPRING_RABBITMQ_USERNAME:guest}
+    password: ${SPRING_RABBITMQ_PASSWORD:guest}
+
+management:
+  health:
+    mail:
+      enabled: false
