@@ -20,8 +20,9 @@ em um repositório separado para facilitar a manutenção e o CI/CD.
 | Módulo                           | Descrição                                                                                              | Repositório                                                                                 |
 |:---------------------------------|:-------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------|
 | 🧱 **Core Application**          | Aplicação principal responsável pelas regras de negócio, APIs REST e integração com os demais módulos. | [archinsight-ai-api](https://github.com/thomaserick/archinsight-ai-api)                     |
-| ☸️ **Kubernetes Infrastructure** | Infraestrutura da aplicação no Kubernetes, incluindo manifests, deployments, ingress e autoscaling.    | [archinsight-ai-api-k8s-infra](https://github.com/thomaserick/archinsight-ai-api-k8s-infra) |
-| 🗄️ **Database Infrastructure**  | Infraestrutura do banco de dados gerenciado (RDS PostgreSQL), versionada e automatizada via Terraform. | [archinsight-ai-api-db-infra](https://github.com/thomaserick/archinsight-ai-api-db-infra)   |
+| ☸️ **Kubernetes Infrastructure** | Infraestrutura da aplicação no Kubernetes, incluindo manifests, deployments, ingress e autoscaling.    | [archinsight-ai-api-k8s-infra](https://github.com/thomaserick/archinsight-ai-k8s-infra) |
+| 🗄️ **Database Infrastructure**  | Infraestrutura do banco de dados gerenciado (RDS PostgreSQL), versionada e automatizada via Terraform. | [archinsight-ai-api-db-infra](https://github.com/thomaserick/archinsight-ai-db-infra)   |
+| 🗄️ **Analise AI **  | Microserviço responsavel por fazer o processamento de analise do diagrama via AI. | [archinsight-ai-analyzer]([https://github.com/thomaserick/archinsight-ai-db-infra](https://github.com/thomaserick/archinsight-ai-analyzer))   |
 
 > 🔍 Cada repositório é autônomo, mas integra-se ao **Core** por meio de pipelines e configurações declarativas (
 > Terraform e CI/CD).
