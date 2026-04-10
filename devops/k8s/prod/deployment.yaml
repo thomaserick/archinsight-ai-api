@@ -19,7 +19,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 60
       containers:
-        - name: archinsight-ai-api-api
+        - name: archinsight-ai-api
           image: "docker.io/thomaserick/archinsight-ai-api:latest"
           resources:
             requests:
@@ -75,3 +75,13 @@ spec:
                 secretKeyRef:
                   name: newrelic-secret
                   key: license-key
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: access-key-id
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aws-secret
+                  key: secret-access-key
