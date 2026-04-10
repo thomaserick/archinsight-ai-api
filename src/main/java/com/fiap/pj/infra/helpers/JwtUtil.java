@@ -26,10 +26,8 @@ public class JwtUtil {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    private static final String SCOPE = "scope";
     private static final String TIPO = "tipo";
     public static final String USER_TYPE = "USER";
-    public static final String CLIENTE_TYPE = "CLIENTE";
     private static final int EXPIRATION_USER_HOURS = 10;
 
     public String extractSubject(String token) {
@@ -38,10 +36,6 @@ public class JwtUtil {
 
     public String extractTipo(String token) {
         return extractClaim(token, claims -> claims.get(TIPO, String.class));
-    }
-
-    public String extractScope(String token) {
-        return extractClaim(token, claims -> claims.get(SCOPE, String.class));
     }
 
     public Date extractExpiration(String token) {

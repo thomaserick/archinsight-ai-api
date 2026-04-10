@@ -19,9 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
-import static com.fiap.pj.infra.helpers.JwtUtil.CLIENTE_TYPE;
 import static com.fiap.pj.infra.helpers.JwtUtil.USER_TYPE;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -48,7 +46,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
 
         String jwt = extractToken(request);
 
-        if (isNull(jwt) || nonNull(SecurityContextHolder.getContext().getAuthentication() )) {
+        if (isNull(jwt) || nonNull(SecurityContextHolder.getContext().getAuthentication())) {
             chain.doFilter(request, response);
             return;
         }
@@ -59,8 +57,6 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
 
             if (USER_TYPE.equals(tipo)) {
                 authenticateUser(subject, jwt, request);
-            } else if (CLIENTE_TYPE.equals(tipo)) {
-                authenticateCliente(subject, jwt, request);
             } else {
                 log.warn("Tipo de token desconhecido");
             }
@@ -98,23 +94,6 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
         }
 
         setAuthentication(userDetails, (List<SimpleGrantedAuthority>) userDetails.getAuthorities(), request);
-    }
-
-    /**
-     * Fluxo SERVERLESS – cliente por CPF
-     */
-
-    private void authenticateCliente(
-            String cpf,
-            String jwt,
-            HttpServletRequest request
-    ) {
-        if (!jwtUtil.validateToken(jwt, cpf)) {
-            return;
-        }
-
-        String scope = jwtUtil.extractScope(jwt);
-        setAuthentication(cpf, List.of(new SimpleGrantedAuthority(scope)), request);
     }
 
 
