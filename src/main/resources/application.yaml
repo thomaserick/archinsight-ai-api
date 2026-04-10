@@ -53,7 +53,7 @@ spring:
       - org.springframework.boot.actuate.autoconfigure.metrics.export.simple.SimpleMetricsExportAutoConfiguration
 
   rabbitmq:
-    addresses: amqps://fzvnomzf:vukdWw4gPFGNryIaJc98W38GBxAGDlOg@armadillo.rmq.cloudamqp.com/fzvnomzf
+    addresses: amqps://elahmmls:evf5hany0fERC15irOqm85beH_WTcxBs@gerbil.rmq.cloudamqp.com/elahmmls
     listener:
       simple:
         retry:
@@ -101,7 +101,6 @@ management:
 
 broker:
   queue:
-    email: default.email
     analise:
       processar: default.analise.processar
 

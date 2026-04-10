@@ -3,10 +3,12 @@ package com.fiap.pj.core.analise.app;
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
 
+import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaPublisherGateway;
 import com.fiap.pj.core.analise.app.usecase.CriarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
 import com.fiap.pj.core.analise.domain.AnaliseDiagrama;
 import com.fiap.pj.core.analise.domain.StatusProcessamento;
+import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaProcessadaEvent;
 import com.fiap.pj.core.analise.domain.vo.Arquivo;
 import com.fiap.pj.core.storage.app.gateways.ArquivoStorageGateway;
 import com.fiap.pj.core.storage.domain.UploadStorage;
@@ -21,11 +23,14 @@ public class CriarAnaliseDiagramaUseCaseImpl implements CriarAnaliseDiagramaUseC
 
     private final AnaliseDiagramaGateway analiseDiagramaGateway;
     private final ArquivoStorageGateway arquivoStorageGateway;
+    private final AnaliseDiagramaPublisherGateway publisherGateway;
 
     public CriarAnaliseDiagramaUseCaseImpl(AnaliseDiagramaGateway analiseDiagramaGateway,
-                                           ArquivoStorageGateway arquivoStorageGateway) {
+                                           ArquivoStorageGateway arquivoStorageGateway,
+                                           AnaliseDiagramaPublisherGateway publisherGateway) {
         this.analiseDiagramaGateway = analiseDiagramaGateway;
         this.arquivoStorageGateway = arquivoStorageGateway;
+        this.publisherGateway = publisherGateway;
     }
 
     @Override
@@ -43,6 +48,10 @@ public class CriarAnaliseDiagramaUseCaseImpl implements CriarAnaliseDiagramaUseC
 
         var arquivo = new Arquivo(nomeArquivo, tipoConteudo);
         var analiseDiagrama = new AnaliseDiagrama(id, arquivo, StatusProcessamento.EM_PROCESSAMENTO);
-        return analiseDiagramaGateway.salvar(analiseDiagrama);
+        analiseDiagramaGateway.salvar(analiseDiagrama);
+
+        publisherGateway.processar(new AnaliseDiagramaProcessadaEvent(analiseDiagrama.getId()));
+
+        return analiseDiagrama;
     }
 }

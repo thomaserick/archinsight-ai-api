@@ -1,6 +1,7 @@
 package com.fiap.pj.core.analise.app;
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
+import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaPublisherGateway;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
 import com.fiap.pj.core.analise.domain.AnaliseDiagrama;
 import com.fiap.pj.core.analise.domain.StatusProcessamento;
@@ -13,14 +14,21 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class CriarAnaliseDiagramaUseCaseImplTest {
@@ -30,6 +38,9 @@ class CriarAnaliseDiagramaUseCaseImplTest {
 
     @Mock
     private ArquivoStorageGateway arquivoStorageGateway;
+
+    @Mock
+    private AnaliseDiagramaPublisherGateway publisherGateway;
 
     @InjectMocks
     private CriarAnaliseDiagramaUseCaseImpl criarAnaliseDiagramaUseCase;
@@ -70,6 +81,8 @@ class CriarAnaliseDiagramaUseCaseImplTest {
 
         assertNotNull(resultado);
         assertEquals(analiseSalva.getId(), resultado.getId());
+
+        verify(publisherGateway).processar(Mockito.any());
     }
 
     @Test
@@ -128,6 +141,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         assertInstanceOf(IOException.class, exception.getCause());
 
         verify(analiseDiagramaGateway, never()).salvar(any());
+        verify(publisherGateway, never()).processar(any());
     }
 
     @Test
