@@ -2,34 +2,47 @@ package com.fiap.pj.core.analise.app;
 
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
+
 import com.fiap.pj.core.analise.app.usecase.CriarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
 import com.fiap.pj.core.analise.domain.AnaliseDiagrama;
 import com.fiap.pj.core.analise.domain.StatusProcessamento;
 import com.fiap.pj.core.analise.domain.vo.Arquivo;
+import com.fiap.pj.core.storage.app.gateways.ArquivoStorageGateway;
+import com.fiap.pj.core.storage.domain.UploadStorage;
+import com.fiap.pj.core.storage.exception.StorageExceptions.ArquivoUploadException;
 
+
+import java.io.IOException;
 import java.util.Objects;
+import java.util.UUID;
 
 public class CriarAnaliseDiagramaUseCaseImpl implements CriarAnaliseDiagramaUseCase {
 
     private final AnaliseDiagramaGateway analiseDiagramaGateway;
+    private final ArquivoStorageGateway arquivoStorageGateway;
 
-    public CriarAnaliseDiagramaUseCaseImpl(AnaliseDiagramaGateway analiseDiagramaGateway) {
+    public CriarAnaliseDiagramaUseCaseImpl(AnaliseDiagramaGateway analiseDiagramaGateway,
+                                           ArquivoStorageGateway arquivoStorageGateway) {
         this.analiseDiagramaGateway = analiseDiagramaGateway;
+        this.arquivoStorageGateway = arquivoStorageGateway;
     }
 
     @Override
-    /*
-      Falta:
-        - implementar upload para Amazon S3
-        - validar se ja existe o arquivo
-
-     */
     public AnaliseDiagrama handle(CriarAnaliseDiagramaCommand cmd) {
+        var id = UUID.randomUUID();
         var nomeArquivo = Objects.requireNonNullElse(cmd.arquivo().getOriginalFilename(), cmd.arquivo().getName());
         var tipoConteudo = Objects.requireNonNullElse(cmd.arquivo().getContentType(), "application/octet-stream");
+
+        try {
+            var uploadStorage = new UploadStorage(id, nomeArquivo, tipoConteudo, cmd.arquivo().getInputStream(), cmd.arquivo().getSize());
+            arquivoStorageGateway.upload(uploadStorage);
+        } catch (IOException e) {
+            throw new ArquivoUploadException("Erro ao realizar upload do arquivo para o S3", e);
+        }
+
         var arquivo = new Arquivo(nomeArquivo, tipoConteudo);
-        var analiseDiagrama = new AnaliseDiagrama(arquivo, StatusProcessamento.EM_PROCESSAMENTO);
+        var analiseDiagrama = new AnaliseDiagrama(id, arquivo, StatusProcessamento.EM_PROCESSAMENTO);
         return analiseDiagramaGateway.salvar(analiseDiagrama);
     }
 }

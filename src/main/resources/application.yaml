@@ -108,3 +108,11 @@ broker:
 
 server:
   port: 8081
+
+aws:
+  s3:
+    region: ${AWS_S3_REGION:us-east-1}
+    access-key: ${AWS_S3_ACCESS_KEY}
+    secret-key: ${AWS_S3_SECRET_KEY}
+    bucket: archinsight-ai-storage
+    endpoint: ${AWS_S3_ENDPOINT:}    #localstack

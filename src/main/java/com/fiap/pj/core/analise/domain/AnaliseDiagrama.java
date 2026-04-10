@@ -19,8 +19,8 @@ public class AnaliseDiagrama {
     ZonedDateTime dataCriacao;
     ZonedDateTime dataAtualizacao;
 
-    public AnaliseDiagrama(Arquivo arquivo, StatusProcessamento status) {
-        this(UUID.randomUUID(), arquivo, status, DateTimeUtils.getNow(), DateTimeUtils.getNow());
+    public AnaliseDiagrama(UUID id, Arquivo arquivo, StatusProcessamento status) {
+        this(id, arquivo, status, DateTimeUtils.getNow(), DateTimeUtils.getNow());
     }
 
     public AnaliseDiagrama(UUID id, Arquivo arquivo, StatusProcessamento status, ZonedDateTime dataCriacao,
