@@ -1,14 +1,15 @@
 package com.fiap.pj.infra.config;
 
 
+import com.fiap.pj.core.analise.app.AtualizarStatusAnaliseUseCaseImpl;
 import com.fiap.pj.core.analise.app.CriarAnaliseDiagramaUseCaseImpl;
 import com.fiap.pj.core.analise.app.ListarAnaliseDiagramaUseCaseImpl;
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaPublisherGateway;
 import com.fiap.pj.core.storage.app.gateways.ArquivoStorageGateway;
-import com.fiap.pj.infra.servico.gateways.AnaliseDiagramaPublisherGatewayImpl;
-import com.fiap.pj.infra.servico.gateways.AnaliseDiagramaRepositoryGatewayImpl;
-import com.fiap.pj.infra.servico.persistense.AnaliseDiagramaRepositoryJpa;
+import com.fiap.pj.infra.analise.gateways.AnaliseDiagramaPublisherGatewayImpl;
+import com.fiap.pj.infra.analise.gateways.AnaliseDiagramaRepositoryGatewayImpl;
+import com.fiap.pj.infra.analise.persistense.AnaliseDiagramaRepositoryJpa;
 import com.fiap.pj.infra.storage.gateways.S3ArquivoStorageGatewayImpl;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +35,11 @@ public class AnaliseDiagramaConfig {
     }
 
     @Bean
+    AtualizarStatusAnaliseUseCaseImpl atualizarStatusAnaliseUseCase(AnaliseDiagramaGateway analiseDiagramaGateway) {
+        return new AtualizarStatusAnaliseUseCaseImpl(analiseDiagramaGateway);
+    }
+
+    @Bean
     AnaliseDiagramaRepositoryGatewayImpl analiseDiagramaRepositoryGateway(AnaliseDiagramaRepositoryJpa repository
     ) {
         return new AnaliseDiagramaRepositoryGatewayImpl(repository);
@@ -48,7 +54,7 @@ public class AnaliseDiagramaConfig {
     @Bean
     AnaliseDiagramaPublisherGatewayImpl analiseDiagramaPublisherGateway(
             RabbitTemplate rabbitTemplate,
-            @Value("${broker.queue.analise.processar}") String routingKey
+            @Value("${broker.queue.analise.solicitada}") String routingKey
     ) {
         return new AnaliseDiagramaPublisherGatewayImpl(rabbitTemplate, routingKey);
     }

@@ -3,8 +3,8 @@ package com.fiap.pj.core.analise.app;
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
 import com.fiap.pj.core.analise.app.usecase.ListarAnaliseDiagramaUseCase;
-import com.fiap.pj.infra.servico.controller.request.ListarAnaliseDiagramaRequest;
-import com.fiap.pj.infra.servico.controller.response.AnaliseDiagramaResponse;
+import com.fiap.pj.infra.analise.controller.request.ListarAnaliseDiagramaRequest;
+import com.fiap.pj.infra.analise.controller.response.AnaliseDiagramaResponse;
 import com.fiap.pj.infra.sk.api.Slice;
 
 

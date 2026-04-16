@@ -1,4 +1,4 @@
-package com.fiap.pj.infra.servico.controller.request;
+package com.fiap.pj.infra.analise.controller.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

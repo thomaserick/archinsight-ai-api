@@ -1,4 +1,4 @@
-package com.fiap.pj.infra.servico.gateways;
+package com.fiap.pj.infra.analise.gateways;
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaPublisherGateway;
 import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaSolicitadaEvent;

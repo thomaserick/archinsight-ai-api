@@ -1,8 +1,8 @@
-package com.fiap.pj.infra.servico.gateways;
+package com.fiap.pj.infra.analise.gateways;
 
 import com.fiap.pj.core.analise.domain.AnaliseDiagrama;
-import com.fiap.pj.infra.servico.persistense.AnaliseDiagramaEntity;
-import com.fiap.pj.infra.servico.persistense.ArquivoEmbeddable;
+import com.fiap.pj.infra.analise.persistense.AnaliseDiagramaEntity;
+import com.fiap.pj.infra.analise.persistense.ArquivoEmbeddable;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

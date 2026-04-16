@@ -1,4 +1,4 @@
-package com.fiap.pj.infra.servico.persistense;
+package com.fiap.pj.infra.analise.persistense;
 
 
 import com.fiap.pj.infra.sk.jpa.ExtendedRepository;

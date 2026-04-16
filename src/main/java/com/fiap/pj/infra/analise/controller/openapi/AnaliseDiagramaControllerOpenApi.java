@@ -1,7 +1,7 @@
-package com.fiap.pj.infra.servico.controller.openapi;
+package com.fiap.pj.infra.analise.controller.openapi;
 
-import com.fiap.pj.infra.servico.controller.request.ListarAnaliseDiagramaRequest;
-import com.fiap.pj.infra.servico.controller.response.AnaliseDiagramaResponse;
+import com.fiap.pj.infra.analise.controller.request.ListarAnaliseDiagramaRequest;
+import com.fiap.pj.infra.analise.controller.response.AnaliseDiagramaResponse;
 import com.fiap.pj.infra.sk.api.Slice;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils.ResponseId;
 import io.swagger.v3.oas.annotations.Operation;

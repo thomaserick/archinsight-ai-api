@@ -16,6 +16,7 @@ public class AnaliseDiagrama {
     UUID id;
     Arquivo arquivo;
     StatusProcessamento status;
+    String motivo;
     ZonedDateTime dataCriacao;
     ZonedDateTime dataAtualizacao;
 
@@ -30,5 +31,10 @@ public class AnaliseDiagrama {
         this.status = requireNonNull(status);
         this.dataCriacao = requireNonNull(dataCriacao);
         this.dataAtualizacao = requireNonNull(dataAtualizacao);
+    }
+
+    public void atualizarStatus(StatusProcessamento status, String motivo) {
+        this.status = status;
+        this.motivo = motivo;
     }
 }

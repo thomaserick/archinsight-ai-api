@@ -1,6 +1,6 @@
-package com.fiap.pj.infra.servico.persistense.specification;
+package com.fiap.pj.infra.analise.persistense.specification;
 
-import com.fiap.pj.infra.servico.persistense.AnaliseDiagramaEntity;
+import com.fiap.pj.infra.analise.persistense.AnaliseDiagramaEntity;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Objects;

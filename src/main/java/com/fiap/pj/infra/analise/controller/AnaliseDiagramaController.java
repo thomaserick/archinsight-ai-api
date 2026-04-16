@@ -1,11 +1,11 @@
-package com.fiap.pj.infra.servico.controller;
+package com.fiap.pj.infra.analise.controller;
 
 import com.fiap.pj.core.analise.app.usecase.CriarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.ListarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
-import com.fiap.pj.infra.servico.controller.openapi.AnaliseDiagramaControllerOpenApi;
-import com.fiap.pj.infra.servico.controller.request.ListarAnaliseDiagramaRequest;
-import com.fiap.pj.infra.servico.controller.response.AnaliseDiagramaResponse;
+import com.fiap.pj.infra.analise.controller.openapi.AnaliseDiagramaControllerOpenApi;
+import com.fiap.pj.infra.analise.controller.request.ListarAnaliseDiagramaRequest;
+import com.fiap.pj.infra.analise.controller.response.AnaliseDiagramaResponse;
 import com.fiap.pj.infra.sk.api.Slice;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils.ResponseId;
