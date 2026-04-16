@@ -82,7 +82,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         assertNotNull(resultado);
         assertEquals(analiseSalva.getId(), resultado.getId());
 
-        verify(publisherGateway).processar(Mockito.any());
+        verify(publisherGateway).dispatch(Mockito.any());
     }
 
     @Test
@@ -141,7 +141,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         assertInstanceOf(IOException.class, exception.getCause());
 
         verify(analiseDiagramaGateway, never()).salvar(any());
-        verify(publisherGateway, never()).processar(any());
+        verify(publisherGateway, never()).dispatch(any());
     }
 
     @Test

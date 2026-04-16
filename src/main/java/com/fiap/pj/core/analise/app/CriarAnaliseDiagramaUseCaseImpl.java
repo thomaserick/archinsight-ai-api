@@ -8,7 +8,7 @@ import com.fiap.pj.core.analise.app.usecase.CriarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
 import com.fiap.pj.core.analise.domain.AnaliseDiagrama;
 import com.fiap.pj.core.analise.domain.StatusProcessamento;
-import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaProcessadaEvent;
+import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaSolicitadaEvent;
 import com.fiap.pj.core.analise.domain.vo.Arquivo;
 import com.fiap.pj.core.storage.app.gateways.ArquivoStorageGateway;
 import com.fiap.pj.core.storage.domain.UploadStorage;
@@ -50,7 +50,7 @@ public class CriarAnaliseDiagramaUseCaseImpl implements CriarAnaliseDiagramaUseC
         var analiseDiagrama = new AnaliseDiagrama(id, arquivo, StatusProcessamento.EM_PROCESSAMENTO);
         analiseDiagramaGateway.salvar(analiseDiagrama);
 
-        publisherGateway.processar(new AnaliseDiagramaProcessadaEvent(analiseDiagrama.getId()));
+        publisherGateway.dispatch(new AnaliseDiagramaSolicitadaEvent(analiseDiagrama.getId()));
 
         return analiseDiagrama;
     }

@@ -1,7 +1,7 @@
 package com.fiap.pj.infra.servico.gateways;
 
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaPublisherGateway;
-import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaProcessadaEvent;
+import com.fiap.pj.core.analise.domain.event.AnaliseDiagramaSolicitadaEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -19,9 +19,9 @@ public class AnaliseDiagramaPublisherGatewayImpl implements AnaliseDiagramaPubli
     }
 
     @Override
-    public void processar(AnaliseDiagramaProcessadaEvent event) {
+    public void dispatch(AnaliseDiagramaSolicitadaEvent event) {
         rabbitTemplate.convertAndSend(routingKey, event);
-        log.info("Mensagem publicada na fila '{}' com id '{}'", routingKey, event.analiseDiagramaId());
+        log.info("Mensagem publicada na fila '{}' com id '{}'", routingKey, event.id());
     }
 }
 

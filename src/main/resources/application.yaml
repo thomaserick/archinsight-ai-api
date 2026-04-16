@@ -102,7 +102,9 @@ management:
 broker:
   queue:
     analise:
-      processar: default.analise.processar
+      solicitada: default.analise.solicitada
+      concluida: default.analise.concluida
+      falhou: default.analise.falhou
 
 
 server:
