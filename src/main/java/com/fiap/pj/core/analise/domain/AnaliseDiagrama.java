@@ -16,17 +16,19 @@ public class AnaliseDiagrama {
     UUID id;
     Arquivo arquivo;
     StatusProcessamento status;
+    String descricao;
     String motivo;
     ZonedDateTime dataCriacao;
     ZonedDateTime dataAtualizacao;
 
-    public AnaliseDiagrama(UUID id, Arquivo arquivo, StatusProcessamento status) {
-        this(id, arquivo, status, DateTimeUtils.getNow(), DateTimeUtils.getNow());
+    public AnaliseDiagrama(UUID id, String descricao, Arquivo arquivo, StatusProcessamento status) {
+        this(id, descricao, arquivo, status, DateTimeUtils.getNow(), DateTimeUtils.getNow());
     }
 
-    public AnaliseDiagrama(UUID id, Arquivo arquivo, StatusProcessamento status, ZonedDateTime dataCriacao,
+    public AnaliseDiagrama(UUID id, String descricao, Arquivo arquivo, StatusProcessamento status, ZonedDateTime dataCriacao,
                            ZonedDateTime dataAtualizacao) {
         this.id = requireNonNull(id);
+        this.descricao = descricao;
         this.arquivo = requireNonNull(arquivo);
         this.status = requireNonNull(status);
         this.dataCriacao = requireNonNull(dataCriacao);

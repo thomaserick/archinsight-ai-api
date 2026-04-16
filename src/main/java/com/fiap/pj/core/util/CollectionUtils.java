@@ -1,8 +1,6 @@
 package com.fiap.pj.core.util;
 
-import java.util.Collection;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import static java.util.Objects.nonNull;
 
@@ -18,8 +16,4 @@ public class CollectionUtils {
         }
     }
 
-    public static <T> Stream<T> nullSafeStream(Collection<T> collection) {
-        if (collection == null) return Stream.empty();
-        return collection.stream();
-    }
 }

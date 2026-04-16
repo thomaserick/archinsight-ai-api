@@ -1,6 +1,7 @@
 CREATE TABLE analises_diagrama
 (
     id               UUID                     NOT NULL,
+    descricao        VARCHAR(255),
     nome_arquivo     VARCHAR(255)             NOT NULL,
     tipo_conteudo    VARCHAR(255)             NOT NULL,
     status           VARCHAR(50)              NOT NULL,

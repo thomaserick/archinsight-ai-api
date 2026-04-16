@@ -23,7 +23,8 @@ public interface AnaliseDiagramaControllerOpenApi {
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Analise Diagrama criado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Analise Diagrama não pode ser processada.")})
     ResponseEntity<ResponseId> criarAnaliseDiagrama(@Parameter(description = "Arquivo comprovante", content = @Content(mediaType = MULTIPART_FORM_DATA_VALUE))
-                                                    @RequestPart(value = "file") MultipartFile file);
+                                                    @RequestPart(value = "file") MultipartFile file,
+                                                    @RequestPart(value = "descricao") String descricao);
 
 
     @Operation(description = "Retorna uma lista de Analise Diagrama.", method = "GET")

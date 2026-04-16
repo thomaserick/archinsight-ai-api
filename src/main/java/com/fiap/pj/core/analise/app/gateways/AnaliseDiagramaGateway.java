@@ -11,7 +11,7 @@ public interface AnaliseDiagramaGateway {
 
     AnaliseDiagrama salvar(AnaliseDiagrama domain);
 
-    Slice<AnaliseDiagramaResponse> listarServico(ListarAnaliseDiagramaRequest request);
+    Slice<AnaliseDiagramaResponse> listarAnaliseDiagrama(ListarAnaliseDiagramaRequest request);
 
     AnaliseDiagrama buscarPorIdOrThrow(UUID id);
 }

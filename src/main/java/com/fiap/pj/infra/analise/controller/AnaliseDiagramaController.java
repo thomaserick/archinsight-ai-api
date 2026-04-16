@@ -38,8 +38,9 @@ public class AnaliseDiagramaController implements AnaliseDiagramaControllerOpenA
     @Override
     @PostMapping(consumes = MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResponseId> criarAnaliseDiagrama(@Parameter(description = "Arquivo para analise diagrama", content = @Content(mediaType = MULTIPART_FORM_DATA_VALUE))
-                                                           @RequestPart(value = "file") MultipartFile file) {
-        var service = criarAnaliseDiagramaUseCase.handle(new CriarAnaliseDiagramaCommand(file));
+                                                           @RequestPart(value = "file") MultipartFile file,
+                                                           @RequestPart(value = "descricao") String descricao) {
+        var service = criarAnaliseDiagramaUseCase.handle(new CriarAnaliseDiagramaCommand(file, descricao));
         return ResponseEntityUtils.create(getClass(), service.getId());
     }
 

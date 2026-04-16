@@ -33,6 +33,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CriarAnaliseDiagramaUseCaseImplTest {
 
+    private static final String DESCRICAO = "Descrição de teste";
+
     @Mock
     private AnaliseDiagramaGateway analiseDiagramaGateway;
 
@@ -56,7 +58,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         var multipartFile = new MockMultipartFile(
                 "arquivo", "diagrama.png", "image/png", "conteudo-fake".getBytes()
         );
-        var cmd = new CriarAnaliseDiagramaCommand(multipartFile);
+        var cmd = new CriarAnaliseDiagramaCommand(multipartFile, DESCRICAO);
 
         when(analiseDiagramaGateway.salvar(any(AnaliseDiagrama.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -94,7 +96,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         when(multipartFile.getInputStream()).thenReturn(new java.io.ByteArrayInputStream("conteudo".getBytes()));
         when(multipartFile.getSize()).thenReturn(8L);
 
-        var cmd = new CriarAnaliseDiagramaCommand(multipartFile);
+        var cmd = new CriarAnaliseDiagramaCommand(multipartFile, DESCRICAO);
 
         when(analiseDiagramaGateway.salvar(any(AnaliseDiagrama.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -111,7 +113,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         var multipartFile = new MockMultipartFile(
                 "arquivo", "diagrama.xml", null, "conteudo".getBytes()
         );
-        var cmd = new CriarAnaliseDiagramaCommand(multipartFile);
+        var cmd = new CriarAnaliseDiagramaCommand(multipartFile, DESCRICAO);
 
         when(analiseDiagramaGateway.salvar(any(AnaliseDiagrama.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));
@@ -131,7 +133,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         when(multipartFile.getContentType()).thenReturn("image/png");
         when(multipartFile.getInputStream()).thenThrow(new IOException("Erro de leitura"));
 
-        var cmd = new CriarAnaliseDiagramaCommand(multipartFile);
+        var cmd = new CriarAnaliseDiagramaCommand(multipartFile, DESCRICAO);
 
         var exception = assertThrows(ArquivoUploadException.class, () ->
                 criarAnaliseDiagramaUseCase.handle(cmd)
@@ -149,7 +151,7 @@ class CriarAnaliseDiagramaUseCaseImplTest {
         var multipartFile = new MockMultipartFile(
                 "arquivo", "diagrama.png", "image/png", "conteudo".getBytes()
         );
-        var cmd = new CriarAnaliseDiagramaCommand(multipartFile);
+        var cmd = new CriarAnaliseDiagramaCommand(multipartFile, DESCRICAO);
 
         when(analiseDiagramaGateway.salvar(any(AnaliseDiagrama.class)))
                 .thenAnswer(invocation -> invocation.getArgument(0));

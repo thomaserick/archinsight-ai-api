@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Sql(scripts = {"classpath:db/it/usuarios/create_usuarios.sql"
 }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @IntegrationTest
-class LIstarlUsuarioControllerIT {
+class ListarlUsuarioControllerIT {
 
     @Autowired
     private MockMvc mock;

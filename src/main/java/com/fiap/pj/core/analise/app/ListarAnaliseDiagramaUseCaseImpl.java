@@ -18,6 +18,6 @@ public class ListarAnaliseDiagramaUseCaseImpl implements ListarAnaliseDiagramaUs
 
     @Override
     public Slice<AnaliseDiagramaResponse> handle(ListarAnaliseDiagramaRequest request) {
-        return analiseDiagramaGateway.listarServico(request);
+        return analiseDiagramaGateway.listarAnaliseDiagrama(request);
     }
 }

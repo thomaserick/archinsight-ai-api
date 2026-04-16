@@ -33,19 +33,25 @@ public class AnaliseDiagramaEntity {
     @Column(nullable = false)
     private StatusProcessamento status;
 
+    private String descricao;
+
+    private String motivo;
+
     @Column(nullable = false)
     private ZonedDateTime dataCriacao;
 
     @Column(nullable = false)
     private ZonedDateTime dataAtualizacao;
 
-    public AnaliseDiagramaEntity(UUID id, ArquivoEmbeddable arquivo, StatusProcessamento status,
-                                 ZonedDateTime dataCriacao, ZonedDateTime dataAtualizacao) {
+    public AnaliseDiagramaEntity(UUID id, ArquivoEmbeddable arquivo, StatusProcessamento status, String descricao,
+                                 ZonedDateTime dataCriacao, ZonedDateTime dataAtualizacao, String motivo) {
         this.id = requireNonNull(id);
         this.arquivo = requireNonNull(arquivo);
         this.status = requireNonNull(status);
+        this.descricao = descricao;
         this.dataCriacao = requireNonNull(dataCriacao);
         this.dataAtualizacao = requireNonNull(dataAtualizacao);
+        this.motivo = motivo;
     }
 
 }

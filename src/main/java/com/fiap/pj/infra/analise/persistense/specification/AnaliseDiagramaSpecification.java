@@ -1,5 +1,6 @@
 package com.fiap.pj.infra.analise.persistense.specification;
 
+import com.fiap.pj.core.analise.domain.StatusProcessamento;
 import com.fiap.pj.infra.analise.persistense.AnaliseDiagramaEntity;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -13,36 +14,36 @@ public class AnaliseDiagramaSpecification {
 
 
     private static final String FIELD_DESCRICAO = "descricao";
-    private static final String FIELD_ATIVO = "ativo";
+    private static final String FIELD_STATUS = "status";
 
-    private final String nome;
-    private final Boolean ativo;
+    private final String descricao;
+    private final StatusProcessamento status;
 
-    public AnaliseDiagramaSpecification(String nome, Boolean ativo) {
-        this.nome = nome;
-        this.ativo = ativo;
+    public AnaliseDiagramaSpecification(String descricao, StatusProcessamento status) {
+        this.descricao = descricao;
+        this.status = status;
     }
 
     public Specification<AnaliseDiagramaEntity> buildSpecification() {
         Specification<AnaliseDiagramaEntity> specs = Specification.allOf();
 
-        if (hasText(this.nome)) {
-            specs = specs.and(queContenhaNomeCom(this.nome));
+        if (hasText(this.descricao)) {
+            specs = specs.and(queContenhaNomeCom(this.descricao));
         }
 
-        if (Objects.nonNull(ativo)) {
-            specs = specs.and(queContenhaAtivoIgualA(this.ativo));
+        if (Objects.nonNull(status)) {
+            specs = specs.and(queContenhaStatusIgualA(this.status));
         }
         return specs;
     }
 
-    private Specification<AnaliseDiagramaEntity> queContenhaNomeCom(String name) {
+    private Specification<AnaliseDiagramaEntity> queContenhaNomeCom(String descricao) {
         return (root, criteriaQuery, builder) ->
-                builder.like(builder.upper(root.get(FIELD_DESCRICAO)), likeTerm(name.trim().toUpperCase()));
+                builder.like(builder.upper(root.get(FIELD_DESCRICAO)), likeTerm(descricao.trim().toUpperCase()));
     }
 
-    private Specification<AnaliseDiagramaEntity> queContenhaAtivoIgualA(boolean active) {
+    private Specification<AnaliseDiagramaEntity> queContenhaStatusIgualA(StatusProcessamento status) {
         return (root, criteriaQuery, builder) ->
-                builder.equal(root.get(FIELD_ATIVO), active);
+                builder.equal(root.get(FIELD_STATUS), status.name());
     }
 }

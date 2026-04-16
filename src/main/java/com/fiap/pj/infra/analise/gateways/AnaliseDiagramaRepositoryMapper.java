@@ -13,18 +13,20 @@ public class AnaliseDiagramaRepositoryMapper {
                 analiseDiagrama.getId(),
                 new ArquivoEmbeddable(analiseDiagrama.getArquivo()),
                 analiseDiagrama.getStatus(),
+                analiseDiagrama.getDescricao(),
                 analiseDiagrama.getDataCriacao(),
-                analiseDiagrama.getDataAtualizacao()
+                analiseDiagrama.getDataAtualizacao(), analiseDiagrama.getMotivo()
         );
     }
 
     public static AnaliseDiagrama mapToDomain(AnaliseDiagramaEntity entity) {
         return new AnaliseDiagrama(
                 entity.getId(),
+                entity.getDescricao(),
                 entity.getArquivo().toDomain(),
                 entity.getStatus(),
                 entity.getDataCriacao(),
-                entity.getDataAtualizacao()
-        );
+                entity.getDataAtualizacao());
+
     }
 }

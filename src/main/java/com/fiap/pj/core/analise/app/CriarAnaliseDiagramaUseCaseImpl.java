@@ -47,7 +47,7 @@ public class CriarAnaliseDiagramaUseCaseImpl implements CriarAnaliseDiagramaUseC
         }
 
         var arquivo = new Arquivo(nomeArquivo, tipoConteudo);
-        var analiseDiagrama = new AnaliseDiagrama(id, arquivo, StatusProcessamento.EM_PROCESSAMENTO);
+        var analiseDiagrama = new AnaliseDiagrama(id, cmd.descricao(), arquivo, StatusProcessamento.EM_PROCESSAMENTO);
         analiseDiagramaGateway.salvar(analiseDiagrama);
 
         publisherGateway.dispatch(new AnaliseDiagramaSolicitadaEvent(analiseDiagrama.getId()));

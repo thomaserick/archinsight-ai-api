@@ -2,20 +2,27 @@ package com.fiap.pj.infra.analise.controller.response;
 
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fiap.pj.core.analise.domain.StatusProcessamento;
 
-import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
-@JsonPropertyOrder({"id", "descricao", "valorUnitario", "observacao", "ativo"})
+@JsonPropertyOrder({"id", "descricao", "status", "motivo"})
 public interface AnaliseDiagramaResponse {
 
     String getId();
 
     String getDescricao();
 
-    BigDecimal getValorUnitario();
+    String getMotivo();
 
-    String getObservacao();
+    ArquivoProjection getArquivo();
 
-    boolean isAtivo();
+    StatusProcessamento getStatus();
 
+    ZonedDateTime getDataCriacao();
+
+    interface ArquivoProjection {
+        String getNome();
+        String getTipoConteudo();
+    }
 }
