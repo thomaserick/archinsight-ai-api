@@ -2,6 +2,7 @@ package com.fiap.pj.infra.config;
 
 
 import com.fiap.pj.core.analise.app.AtualizarStatusAnaliseUseCaseImpl;
+import com.fiap.pj.core.analise.app.BuscarAnaliseDiagramaUseCaseImpl;
 import com.fiap.pj.core.analise.app.CriarAnaliseDiagramaUseCaseImpl;
 import com.fiap.pj.core.analise.app.ListarAnaliseDiagramaUseCaseImpl;
 import com.fiap.pj.core.analise.app.gateways.AnaliseDiagramaGateway;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 @Configuration
 public class AnaliseDiagramaConfig {
@@ -35,6 +37,12 @@ public class AnaliseDiagramaConfig {
     }
 
     @Bean
+    BuscarAnaliseDiagramaUseCaseImpl buscarAnaliseDiagramaUseCase(AnaliseDiagramaGateway analiseDiagramaGateway,
+                                                                   ArquivoStorageGateway arquivoStorageGateway) {
+        return new BuscarAnaliseDiagramaUseCaseImpl(analiseDiagramaGateway, arquivoStorageGateway);
+    }
+
+    @Bean
     AtualizarStatusAnaliseUseCaseImpl atualizarStatusAnaliseUseCase(AnaliseDiagramaGateway analiseDiagramaGateway) {
         return new AtualizarStatusAnaliseUseCaseImpl(analiseDiagramaGateway);
     }
@@ -46,9 +54,9 @@ public class AnaliseDiagramaConfig {
     }
 
     @Bean
-    S3ArquivoStorageGatewayImpl arquivoStorageGateway(S3Client s3Client
+    S3ArquivoStorageGatewayImpl arquivoStorageGateway(S3Client s3Client, S3Presigner s3Presigner
     ) {
-        return new S3ArquivoStorageGatewayImpl(s3Client);
+        return new S3ArquivoStorageGatewayImpl(s3Client, s3Presigner);
     }
 
     @Bean

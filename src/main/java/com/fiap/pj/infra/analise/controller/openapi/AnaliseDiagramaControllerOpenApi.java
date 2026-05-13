@@ -2,6 +2,7 @@ package com.fiap.pj.infra.analise.controller.openapi;
 
 import com.fiap.pj.infra.analise.controller.request.ListarAnaliseDiagramaRequest;
 import com.fiap.pj.infra.analise.controller.response.AnaliseDiagramaResponse;
+import com.fiap.pj.infra.analise.controller.response.BuscarAnaliseDiagramaResponse;
 import com.fiap.pj.infra.sk.api.Slice;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils.ResponseId;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
@@ -30,4 +33,8 @@ public interface AnaliseDiagramaControllerOpenApi {
     @Operation(description = "Retorna uma lista de Analise Diagrama.", method = "GET")
     Slice<AnaliseDiagramaResponse> listarAnalisesDiagram(@ParameterObject ListarAnaliseDiagramaRequest filterRequest, @ParameterObject Pageable pageable);
 
+    @Operation(description = "Buscar Analise Diagrama por ID com URL assinada do arquivo.", method = "GET")
+    @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "Analise Diagrama encontrada."),
+            @ApiResponse(responseCode = "404", description = "Analise Diagrama não encontrada.")})
+    BuscarAnaliseDiagramaResponse buscarAnaliseDiagramaPorId(UUID id);
 }

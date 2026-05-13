@@ -1,11 +1,13 @@
 package com.fiap.pj.infra.analise.controller;
 
+import com.fiap.pj.core.analise.app.usecase.BuscarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.CriarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.ListarAnaliseDiagramaUseCase;
 import com.fiap.pj.core.analise.app.usecase.command.CriarAnaliseDiagramaCommand;
 import com.fiap.pj.infra.analise.controller.openapi.AnaliseDiagramaControllerOpenApi;
 import com.fiap.pj.infra.analise.controller.request.ListarAnaliseDiagramaRequest;
 import com.fiap.pj.infra.analise.controller.response.AnaliseDiagramaResponse;
+import com.fiap.pj.infra.analise.controller.response.BuscarAnaliseDiagramaResponse;
 import com.fiap.pj.infra.sk.api.Slice;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils;
 import com.fiap.pj.infra.sk.web.ResponseEntityUtils.ResponseId;
@@ -16,11 +18,14 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 
@@ -33,6 +38,7 @@ public class AnaliseDiagramaController implements AnaliseDiagramaControllerOpenA
 
     private final CriarAnaliseDiagramaUseCase criarAnaliseDiagramaUseCase;
     private final ListarAnaliseDiagramaUseCase listarAnaliseDiagramaUseCase;
+    private final BuscarAnaliseDiagramaUseCase buscarAnaliseDiagramaUseCase;
 
 
     @Override
@@ -52,5 +58,10 @@ public class AnaliseDiagramaController implements AnaliseDiagramaControllerOpenA
         return listarAnaliseDiagramaUseCase.handle(filterRequest);
     }
 
+    @Override
+    @GetMapping("/{id}")
+    public BuscarAnaliseDiagramaResponse buscarAnaliseDiagramaPorId(@PathVariable UUID id) {
+        return buscarAnaliseDiagramaUseCase.handle(id);
+    }
 
 }
