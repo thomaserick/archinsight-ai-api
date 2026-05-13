@@ -8,11 +8,11 @@ spec:
     kind: Deployment
     name: archinsight-ai-api
   minReplicas: 1
-  maxReplicas: 4
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 75
