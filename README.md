@@ -190,9 +190,9 @@ devops/
 Este projeto utiliza o New Relic para garantir observabilidade completa da aplicação, permitindo monitorar performance,
 saúde, consumo de recursos e falhas operacionais em tempo real.
 
-![Apm](docs/assets/monitor_1.jpg)
+![Apm](docs/assets/monitor_1.png)
 
-![Apm2](docs/assets/monitor_2.jpg)
+![Apm2](docs/assets/monitor_2.png)
 
 ### Visão Geral (APM)
 
